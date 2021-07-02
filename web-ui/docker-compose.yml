@@ -1,0 +1,12 @@
+version: '2'
+services:
+  app:
+    image: 'web-ui:latest'
+    network_mode: bridge
+    build:
+      context: .
+    container_name: web-ui
+    expose:
+      - 8083
+    ports:
+      - 8083:8083

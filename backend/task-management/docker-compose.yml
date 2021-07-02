@@ -1,0 +1,39 @@
+version: '2'
+services:
+  db:
+    image: postgres:latest
+    network_mode: bridge
+    container_name: postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    expose:
+      - 5432
+    ports:
+      - 5431:5432
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_USER=tasks_usr
+      - POSTGRES_DB=tasks
+  app:
+    image: 'task-management:latest'
+    network_mode: bridge
+    build:
+      context: .
+    container_name: task-management
+    expose:
+      - 8080
+    ports:
+      - 8081:8080
+    depends_on:
+      - db
+    links:
+      - db
+    environment:
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_USER=tasks_usr
+      - POSTGRES_DB=tasks
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+volumes:
+  postgres-data:

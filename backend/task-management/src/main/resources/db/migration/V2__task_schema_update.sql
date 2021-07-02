@@ -1,0 +1,1 @@
+ALTER TABLE task ALTER COLUMN user_id TYPE character varying(255) ;

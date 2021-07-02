@@ -1,0 +1,11 @@
+version: '2'
+services:
+  app:
+    image: 'user-management:latest'
+    build:
+      context: .
+    container_name: user-management
+    expose:
+      - 8081
+    ports:
+      - 8081:8081
